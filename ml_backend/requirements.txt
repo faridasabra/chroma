@@ -1,0 +1,5 @@
+# CHROMA/ml_backend/requirements.txt
+flask
+pandas
+scikit-learn
+joblib
