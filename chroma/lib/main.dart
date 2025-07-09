@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
-import 'prediction_page.dart';
+import 'splash_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChromaApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+class ChromaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CHROMA',
-      theme: ThemeData(
-        primarySwatch: Colors.purple,
-      ),
-      home: PredictionPage(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(), // You can customize this
+      home: SplashScreen(),
     );
   }
 }
