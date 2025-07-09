@@ -1,23 +1,26 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import joblib
 import pandas as pd
+import os
 
 # Initialize Flask app
 app = Flask(__name__)
+CORS(app)
 
-# Load the trained model and label encoder
-model = joblib.load('ml_backend/models/style_predictor.pkl')
-subcategory_encoder = joblib.load('ml_backend/models/subcategory_encoder.pkl')
+BASE_DIR = os.path.dirname(__file__)  # ml_backend/
+MODEL_DIR = os.path.join(BASE_DIR, 'models')
 
-# Label encoders for input features
-color_encoder = joblib.load('ml_backend/models/color_encoder.pkl')
-season_encoder = joblib.load('ml_backend/models/season_encoder.pkl')
-gender_encoder = joblib.load('ml_backend/models/gender_encoder.pkl')
-usage_encoder = joblib.load('ml_backend/models/usage_encoder.pkl')
+model = joblib.load(os.path.join(MODEL_DIR, 'style_predictor.pkl'))
+subcategory_encoder = joblib.load(os.path.join(MODEL_DIR, 'subcategory_encoder.pkl'))
+color_encoder = joblib.load(os.path.join(MODEL_DIR, 'color_encoder.pkl'))
+season_encoder = joblib.load(os.path.join(MODEL_DIR, 'season_encoder.pkl'))
+gender_encoder = joblib.load(os.path.join(MODEL_DIR, 'gender_encoder.pkl'))
+usage_encoder = joblib.load(os.path.join(MODEL_DIR, 'usage_encoder.pkl'))
 
 @app.route('/')
 def home():
-    return jsonify({'message': 'CHROMA Style Prediction API is running 🎨'})
+    return jsonify({'message': 'CHROMA Style Prediction API is running...'})
 
 @app.route('/predict', methods=['POST'])
 def predict():
